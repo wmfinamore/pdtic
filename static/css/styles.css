@@ -1,0 +1,102 @@
+#header_obj {
+    color: black;
+    text-align: center;
+}
+
+#footer_obj {
+    color: black;
+    text-align: right;
+}
+
+.assinatura {
+    top: 40pt;
+    margin: 50pt;
+}
+
+#row-header {
+    height: 20pt;
+    font-size: 14pt;
+}
+
+#logo {
+    width: 50pt;
+    height: 40pt;
+}
+
+.body-content {
+    font-size: 12pt;
+}
+
+.body-content h1{
+    text-align: center;
+}
+
+.responsaveis p{
+    margin-bottom: 20pt;
+    text-align: center;
+    max-width: 200pt;
+    padding-top: 5pt;
+}
+
+.responsaveis h3{
+    margin-bottom: 20pt;
+    text-align: center;
+    max-width: 200pt;
+    padding-top: 5pt;
+}
+
+.introducao p{
+    margin: 0;
+}
+
+.responsavel-setorial p{
+    margin-top: 40pt;
+    text-align: center;
+    max-width: 200pt;
+}
+
+.acao_table {
+    font-size: 10pt;
+    border-bottom: 1px solid black;
+}
+
+.acao_table td, th{
+    text-align: left;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.acao_status_azul {
+    color: cyan;
+    background-color: black;
+}
+
+.acao_status_vermelho {
+    color: darkred;
+    background-color: darkgray;
+}
+
+.acao_status_amarelo {
+    color: yellow;
+    background-color: black;
+}
+
+.acao_status_verde {
+    color: darkgreen;
+    background-color: darkgray;
+}
+
+.acao_status_laranja {
+    color: darkorange;
+    background-color: black;
+}
+
+.alerta_projeto_laranja {
+    color: darkorange;
+    background-color: black;
+}
+
+.alerta_projeto_vermelho {
+    color: darkred;
+    background-color: darkgray;
+}

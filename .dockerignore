@@ -1,0 +1,7 @@
+/artefatos
+/integracoes
+/nginx
+docker-compose.yml
+Dockerfile
+Pipfile
+Pipfile.lock

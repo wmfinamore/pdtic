@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  webpdtic:
+    build: .
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume_pdtic:/home/pdtic/web/staticfiles
+      - media_volume_pdtic:/home/pdtic/web/mediafiles
+    expose:
+      - 8000
+    env_file:
+      - .env
+    depends_on:
+      - dbpdtic
+      - redipdtic
+
+  redipdtic:
+    image: redis:7.0.11-alpine
+    #restart: always
+    expose:
+      - 6379
+    command: redis-server
+
+  dbpdtic:
+    image: postgres:15.2-alpine
+    volumes:
+      - postgres_data_pdtic:/var/lib/postgresql/data/
+    ports:
+      - '15437:5432'
+    env_file:
+      - .env
+
+  nginxpdtic:
+    build: ./nginx
+    volumes:
+      - static_volume_pdtic:/home/pdtic/web/staticfiles
+      - media_volume_pdtic:/home/pdtic/web/mediafiles
+    ports:
+      - '1342:80'
+    depends_on:
+      - webpdtic
+
+volumes:
+  postgres_data_pdtic:
+  static_volume_pdtic:
+  media_volume_pdtic:

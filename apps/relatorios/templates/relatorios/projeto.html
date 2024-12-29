@@ -1,0 +1,96 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Termo de Referência</title>
+    <link rel="stylesheet" href="{{ HOST }}{% static '/css/styles.css' %}">
+    <style>
+        @page {
+            size: a4 portrait;
+            @frame header_frame {
+                -pdf-frame-content: header_obj;
+                top: 30pt; left: 50pt;
+                width: 512pt; height: 40pt;
+            }
+            @frame content_frame{
+                top: 90pt; left: 50pt;
+                width: 512pt; height: 632pt;
+            }
+            @frame footer_frame {
+                -pdf-frame-content: footer_obj;
+                top: 772pt; left: 50pt;
+                width: 512pt; height: 20pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header_obj">
+        <table>
+            <tr id="row-header">
+                <td rowspan="2"id="logo"><img id="logo" src="{{ HOST }}{% static '/img/brasao.png' %}" alt="Logo"/></td>
+                <td><strong>PREFEITURA DE SOROCABA</strong></td>
+            </tr>
+            <tr id="row-header">
+                <td>Ficha de Projeto</td>
+            </tr>
+        </table>
+    </div>
+    <div id="footer_obj">
+        &copy;PDTIC - Página <pdf:pagenumber> de <pdf:pagecount>
+    </div>
+    <div class="body-content">
+        <div><h1>{{ Projeto.projeto }}</h1></div>
+        <div>
+            <strong>Tipo de Projeto:</strong> {{ Projeto.tipo }}
+            <strong>Valor Estimado:</strong> R$ {{ Projeto.valor_estimado }}
+        </div>
+        <br>
+        <div>
+            <strong>Detalhamento:</strong><br> {{ Projeto.detalhamento }}
+        </div>
+        <br>
+        <div>
+            <strong>Situação:</strong> {{ Projeto.situacao }}
+            <strong>Prioritário?</strong> {% if Projeto.prioritario %}Sim {% else %}Não{% endif %}
+        </div>
+        <br>
+        <div>
+            <strong>Última Data: </strong> {{ Projeto.ultima_data }}
+            <strong>Percentual concluído: </strong> {{ Projeto.percentual_concluido }}%
+            <strong>Alerta: </strong>
+                <button class="alerta_projeto_{{ Projeto.status_geral }}">
+                    {{ Projeto.status_geral }}
+                </button>
+        </div>
+        <br>
+        <div>
+            <table class="acao_table" repeat="4">
+                <tr>
+                    <th colspan="3">Ação</th>
+                    <th>Início</th>
+                    <th>Conclusão</th>
+                    <th>Nova Data</th>
+                    <th>Conclusão Real</th>
+                </tr>
+                {% for acao in Projeto.projeto_fases.all %}
+                    <tr>
+                        <td colspan="3" class="acao_status_{{ acao.status }}">{{ acao.descricao_acao }}</td>
+                        <td>{{ acao.data_inicio|date:'d/m/Y' }}</td>
+                        <td>{{ acao.data_conclusao|date:'d/m/Y' }}</td>
+                        <td>{{ acao.nova_data|date:'d/m/Y' }}</td>
+                        <td>{{ acao.data_real_conclusao|date:'d/m/Y' }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7"><strong>Observacao:</strong> {{ acao.observacao }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <pdf:pdf-next-page />
+    </div>
+</body>
+</html>

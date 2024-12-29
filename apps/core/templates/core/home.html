@@ -1,0 +1,65 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}
+Projetos de Tecnologia da Informação
+{% endblock %}
+
+{% block main %}
+ <div class="row justify-content-center m-5">
+        <div class="card col-md-8">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-2">
+                        <img class="img-thumbnail" src="{% static 'img/brasao.png' %}" alt="Brasão" \>
+                    </div>
+                    <div class="col-10">
+                        <h2 style="text-align: center;">PDTIC - Gestão do Plano Diretor de TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        {% if user.is_authenticated %}
+                        <p>Bem vindo <strong>{{ user.first_name }} {{ user.last_name }}</strong>!!</p>
+                         <div class="d-grid gap-2 mt-5">
+                             <a href="/pdtic/admin" class="btn btn-success">Iniciar</a>
+                             <form action="{% url 'logout' %}" method="post">
+                                 {% csrf_token %}
+                                 <div class="row">
+                                     <button type="submit" class="btn btn-danger">Sair</button>
+                                 </div>
+
+                             </form>
+
+                             <a href="{% url 'password_change' %}" class="btn btn-warning">Trocar Senha</a>
+                             <a href="{% url 'lista_secretaria' %}" class="btn btn-info">Lista de Secretarias</a>
+                         </div>
+
+                        {% else %}
+                            <p>Bem vindo!! Identifique-se para começarmos!</p>
+                            <div class="d-grid gap-2 mt-5">
+                                <a href="{% url 'login' %}" class="btn btn-primary">Identificar</a>
+                            </div>
+                            <div class="d-grid gap-2 mt-5">
+                                <a href="{% url 'password_reset' %}" class="btn btn-info">Esqueci minha senha!</a>
+                            </div>
+
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-6">
+                        {% if user.is_authenticated %}
+                            <img class="img-fluid" src="{% static 'img/undraw_scrum_board_re_wk7v.svg' %}" alt="Reset" \>
+                        {% else %}
+                            <img class="img-fluid" src="{% static 'img/undraw_welcome_re_h3d9.svg' %}" alt="Reset" \>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

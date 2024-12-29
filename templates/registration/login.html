@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block main %}
+<div class="row justify-content-center m-5">
+    <div class="card col-md-8">
+        <div class="card-header">
+            <div class="row justify-content-center">
+                <div class="col-md-2">
+                    <img class="img-thumbnail" src="{% static 'img/brasao.png' %}" alt="Brasão" \>
+                </div>
+                <div class="col-md-10">
+                    <h2 style="text-align: center;">PDTIC - Gestão do Plano Diretor de TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <h3 align="center" class="mt-5">Login</h3>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-info mb-4">Login</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-fluid" src="{% static 'img/undraw_login_re_4vu2.svg' %}" alt="Login" \>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
