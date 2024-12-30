@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     # App's
     'accounts',
     'apps.secretarias',
-    'apps.projetos',
     'apps.core',
     'apps.equipes',
     'apps.relatorios',
@@ -183,13 +182,6 @@ CACHES = {
 }
 
 CUSTOM_CACHE_TIME = env.int('CACHE_TIME')
-
-# CONFIGURACOES DE SITUACAO DO PROJETO
-
-SITUACAO_VERMELHA = env.int('SITUACAO_VERMELHA')
-SITUACAO_LARANJA = env.int('SITUACAO_LARANJA')
-SITUACAO_VERDE = env.int('SITUACAO_VERDE')
-SITUACAO_NORMAL = env.int('SITUACAO_NORMAL')
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
