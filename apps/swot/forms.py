@@ -1,5 +1,5 @@
 from django import forms
-from apps.swot.models import TipoAmbiente
+from apps.swot.models import TipoAmbiente, TipoAvaliacao
 
 
 class TipoAmbienteForm(forms.ModelForm):
@@ -11,5 +11,19 @@ class TipoAmbienteForm(forms.ModelForm):
         model = TipoAmbiente
         fields = ['nome',]
         labels = {
+            'nome': 'Nome',
+        }
+
+
+class TipoAvaliacaoForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(TipoAvaliacaoForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = TipoAvaliacao
+        fields = ['tipo_ambiente', 'nome',]
+        labels = {
+            'tipo_ambiente': 'Tipo de Ambiente',
             'nome': 'Nome',
         }
