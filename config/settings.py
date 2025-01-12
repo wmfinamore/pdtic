@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'apps.equipes',
     'apps.relatorios',
     'apps.planos',
+    'apps.swot',
 ]
 
 MIDDLEWARE = [
