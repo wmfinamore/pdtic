@@ -1,3 +1,14 @@
 from django.db import models
+from apps.core.models import Auditoria
 
-# Create your models here.
+
+class TipoAmbiente(Auditoria):
+    nome = models.CharField(max_length=100, unique=True, db_comment='No do tipo de ambiente')
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = 'Tipo de Ambiente'
+        verbose_name_plural = 'Tipos de Ambiente'
+        db_table_comment = 'Tipos de ambiente na análise SWOT'
