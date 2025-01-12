@@ -10,6 +10,8 @@ urlpatterns = [
     path('pdtic/', include('apps.core.urls')),
     path('pdtic/admin/', admin.site.urls),
     path('pdtic/secretarias/', include('apps.secretarias.urls')),
+    path('chaining/', include('smart_selects.urls')),
+
 ]
 
 # Rota para ativar o debug toolbar quando do django estiver em modo debug

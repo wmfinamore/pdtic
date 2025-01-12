@@ -2,6 +2,7 @@ from environs import Env
 from pathlib import Path
 import os
 from import_export.formats.base_formats import XLSX, JSON, CSV
+from smart_selects.widgets import JQUERY_URL
 
 env = Env()
 env.read_env()
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'import_export',
+    'smart_selects',
 
     # App's
     'accounts',
@@ -194,3 +196,5 @@ EXPORT_FORMATS = [XLSX, JSON, CSV]
 
 # VALUE FORMAT
 USE_THOUSAND_SEPARATOR = True
+
+JQUERY_URL = env.str('JQUERY_URL')

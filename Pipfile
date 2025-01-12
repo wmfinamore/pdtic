@@ -17,6 +17,7 @@ crispy-bootstrap5 = "*"
 django-import-export = "*"
 tablib = {extras = ["xlsx"], version = "*"}
 xhtml2pdf = "*"
+django-smart-selects = "*"
 
 [dev-packages]
 
