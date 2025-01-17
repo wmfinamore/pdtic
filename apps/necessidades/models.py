@@ -35,3 +35,15 @@ class NecessidadeInformacao(Auditoria):
         verbose_name_plural = 'Necessidades de Informação'
         db_table_comment = 'Necessidades de informação para o PDTIC'
         ordering = ['codigo']
+
+class TipoNecessidade(Auditoria):
+    nome = models.CharField(max_length=50, unique=True, db_comment='Nome do tipo de necessidade')
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = 'Tipo de Necessidade'
+        verbose_name_plural = 'Tipos de Necessidade'
+        db_table_comment = 'Tipos de necessidade para o PDTIC'
+        ordering = ['nome', ]
