@@ -47,3 +47,24 @@ class TipoNecessidade(Auditoria):
         verbose_name_plural = 'Tipos de Necessidade'
         db_table_comment = 'Tipos de necessidade para o PDTIC'
         ordering = ['nome', ]
+
+
+class NecessidadeTI(Auditoria):
+    codigo = models.CharField(max_length=10, unique=True, db_comment='Código da necessidade de TI')
+    tipo_necessidade = models.ForeignKey(TipoNecessidade, on_delete=models.PROTECT, db_comment='Tipo de necessidade '
+                                                                                               'de TI')
+    descricao = models.TextField(db_comment='Descrição da necessidade de TI')
+    estrategia_relacionada = models.ForeignKey(PrincipioDiretriz, on_delete=models.PROTECT, null=True, blank=True,
+                                               db_comment='Principio ou estratégia relacionada com à necessidade de TI')
+    origem = models.ForeignKey(TipoOrigem, on_delete=models.PROTECT, db_comment='Origem da necessidade')
+    areas_relacionadas = models.ManyToManyField(Secretaria, db_comment='Secretarias relacionadas com a necessidade de '
+                                                                       'TI')
+
+    def __str__(self):
+        return f"{self.codigo} - {self.descricao[:50]}"
+
+    class Meta:
+        verbose_name = 'Necessidade de TI'
+        verbose_name_plural = 'Necessidades de TI'
+        db_table_comment = 'Inventário de Necessidades de TI para o PDTIC'
+        ordering = ['codigo']

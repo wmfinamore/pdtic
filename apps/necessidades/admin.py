@@ -1,7 +1,7 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import TipoOrigem, NecessidadeInformacao, TipoNecessidade
-from .forms import TipoOrigemForm, NecessidadeInformacaoForm, TipoNecessidadeForm
+from .models import TipoOrigem, NecessidadeInformacao, TipoNecessidade, NecessidadeTI
+from .forms import TipoOrigemForm, NecessidadeInformacaoForm, TipoNecessidadeForm, NecessidadeTIForm
 
 
 @admin.register(TipoOrigem)
@@ -28,3 +28,11 @@ class TipoNecessidade(SimpleHistoryAdmin):
     search_fields = ['nome', ]
 
 
+@admin.register(NecessidadeTI)
+class NecessidadeTIAdmin(SimpleHistoryAdmin):
+    form = NecessidadeTIForm
+    list_display = ['codigo', 'descricao', 'tipo_necessidade', 'origem',]
+    search_fields = ['codigo', 'descricao',]
+    list_filter = ['origem', 'tipo_necessidade']
+    autocomplete_fields = ['origem', 'tipo_necessidade', 'estrategia_relacionada',]
+    filter_horizontal = ['areas_relacionadas']

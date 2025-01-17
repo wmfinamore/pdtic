@@ -1,5 +1,5 @@
 from django import forms
-from .models import TipoOrigem, NecessidadeInformacao, TipoNecessidade
+from .models import TipoOrigem, NecessidadeInformacao, TipoNecessidade, NecessidadeTI
 
 
 class TipoOrigemForm(forms.ModelForm):
@@ -42,4 +42,22 @@ class TipoNecessidadeForm(forms.ModelForm):
         fields = ['nome', ]
         labels = {
             'nome': 'Nome',
+        }
+
+
+class NecessidadeTIForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(NecessidadeTIForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = NecessidadeTI
+        fields = ['codigo', 'tipo_necessidade', 'descricao', 'estrategia_relacionada', 'origem', 'areas_relacionadas',]
+        labels = {
+            'codigo': 'Codigo',
+            'tipo_necessidade': 'Tipo de Necessidade',
+            'descricao': 'Descrição',
+            'estrategia_relacionada': 'Estratégia Relacionada',
+            'origem': 'Origem',
+            'areas_relacionadas': 'Áreas Relacionadas',
         }
