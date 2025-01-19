@@ -28,7 +28,8 @@ class AcaoForm(forms.ModelForm):
     class Meta:
         model = Acao
         fields = ['codigo', 'metas', 'nome', 'areas_responsaveis', 'data_inicio_estimada',
-                  'data_conclusao_estimada']
+                  'data_conclusao_estimada', 'quantidade_pessoas', 'competencias', 'valor_investimento',
+                  'valor_custeio']
         labels = {
             'codigo': 'Código',
             'metas': 'Metas',
@@ -36,4 +37,8 @@ class AcaoForm(forms.ModelForm):
             'areas_responsaveis': 'Áreas responsáveis',
             'data_inicio_estimada': 'Data de Início Estimada',
             'data_conclusao_estimada': 'Data de Conclusão Estimada',
+            'quantidade_pessoas': 'Quantidade de Pessoas',
+            'competencias': 'Competências',
+            'valor_investimento': 'Valor da Investimento',
+            'valor_custeio': 'Valor de Custeio',
         }

@@ -19,5 +19,41 @@ class AcaoAdmin(SimpleHistoryAdmin):
     list_display = ['codigo', 'nome', 'data_inicio_estimada', 'data_conclusao_estimada']
     search_fields = ['codigo', 'nome',]
     date_hierarchy = 'data_conclusao_estimada'
-    filter_horizontal = ['metas', 'areas_responsaveis', ]
-
+    filter_horizontal = ['metas', 'areas_responsaveis', 'competencias']
+    fieldsets = [
+        (
+            None,
+            {
+                'fields': [
+                    ('codigo','nome'),
+                    ('metas',),
+                    ('areas_responsaveis',)
+                ]
+            },
+        ),
+        (
+            'Prazos',
+            {
+                'fields': [
+                    ('data_inicio_estimada','data_conclusao_estimada', ),
+                ]
+            },
+        ),
+        (
+            'Recursos Humanos',
+            {
+                'fields': [
+                    ('quantidade_pessoas',),
+                    ('competencias', ),
+                ]
+            },
+        ),
+        (
+            'Recursos Orçamentários',
+            {
+                'fields': [
+                    ('valor_investimento', 'valor_custeio', ),
+                ]
+            },
+        ),
+    ]
