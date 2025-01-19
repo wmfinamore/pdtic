@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'apps.planos',
     'apps.swot',
     'apps.necessidades',
+    'apps.metas',
 ]
 
 MIDDLEWARE = [

@@ -22,3 +22,6 @@ class PrincipioDiretriz(Auditoria):
         constraints = [
             models.UniqueConstraint(fields=['codigo'], name='unique_codigo_principio_diretriz'),
         ]
+
+
+
