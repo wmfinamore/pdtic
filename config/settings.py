@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'apps.swot',
     'apps.necessidades',
     'apps.metas',
+    'apps.indicadores',
 ]
 
 MIDDLEWARE = [
