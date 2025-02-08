@@ -18,6 +18,7 @@ django-import-export = "*"
 tablib = {extras = ["xlsx"], version = "*"}
 xhtml2pdf = "*"
 django-smart-selects = "*"
+django-sequences = "*"
 
 [dev-packages]
 

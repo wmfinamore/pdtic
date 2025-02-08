@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'import_export',
     'smart_selects',
+    'sequences.apps.SequencesConfig',
 
     # App's
     'accounts',

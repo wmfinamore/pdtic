@@ -1,7 +1,15 @@
 from django.contrib import admin
-from .models import PrincipioDiretriz
-from .forms import PrincipioDiretrizForm
+from .models import PrincipioDiretriz, FonteDiretriz
+from .forms import PrincipioDiretrizForm, FonteDiretrizForm
 from simple_history.admin import SimpleHistoryAdmin
+
+
+@admin.register(FonteDiretriz)
+class FonteDiretrizAdmin(SimpleHistoryAdmin):
+    form = FonteDiretrizForm
+    model = FonteDiretriz
+    list_filter = ['id', 'nome', ]
+    search_fields = ['nome', ]
 
 
 @admin.register(PrincipioDiretriz)
@@ -14,8 +22,11 @@ class PrincipioDiretrizAdmin(SimpleHistoryAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                ('codigo', 'principio_diretriz'),
+                ('codigo',),
+                ('principio_diretriz',),
                 ('origem', 'criterio_priorizacao'),
             )
         }),
     )
+    autocomplete_fields = ['origem', ]
+    readonly_fields = ['codigo', ]
