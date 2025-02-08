@@ -2,10 +2,11 @@ from django.db import models
 from apps.core.models import Auditoria
 from apps.planos.models import PrincipioDiretriz
 from apps.secretarias.models import Secretaria
+from sequences import get_next_value
 
 
 class TipoOrigem(Auditoria):
-    nome = models.CharField( max_length=100, unique=True, db_comment='Nome da origem da necessidade')
+    nome = models.CharField( max_length=100, db_comment='Nome da origem da necessidade')
 
     def __str__(self):
         return self.nome
@@ -15,6 +16,9 @@ class TipoOrigem(Auditoria):
         verbose_name_plural = 'Origens'
         db_table_comment = 'Tipos de origem de uma necessidade'
         ordering = ['nome']
+        constraints = [
+            models.UniqueConstraint(fields=['nome'], name='unique_nome_origem'),
+        ]
 
 
 class NecessidadeInformacao(Auditoria):
@@ -35,8 +39,10 @@ class NecessidadeInformacao(Auditoria):
         db_table_comment = 'Necessidades de informação para o PDTIC'
         ordering = ['codigo']
 
+
 class TipoNecessidade(Auditoria):
-    nome = models.CharField(max_length=50, unique=True, db_comment='Nome do tipo de necessidade')
+    prefixo = models.CharField(max_length=5, null=True, db_comment='Prefixo do tipo de necessidade')
+    nome = models.CharField(max_length=50, db_comment='Nome do tipo de necessidade')
 
     def __str__(self):
         return self.nome
@@ -46,6 +52,10 @@ class TipoNecessidade(Auditoria):
         verbose_name_plural = 'Tipos de Necessidade'
         db_table_comment = 'Tipos de necessidade para o PDTIC'
         ordering = ['nome', ]
+        constraints = [
+            models.UniqueConstraint(fields=['nome'], name='unique_nome_tipo_necessidade'),
+            models.UniqueConstraint(fields=['prefixo'], name='unique_prefixo_tipo_necessidade'),
+        ]
 
 
 class NecessidadeTI(Auditoria):

@@ -39,8 +39,9 @@ class TipoNecessidadeForm(forms.ModelForm):
 
     class Meta:
         model = TipoNecessidade
-        fields = ['nome', ]
+        fields = ['prefixo','nome', ]
         labels = {
+            'prefixo': 'Prefixo',
             'nome': 'Nome',
         }
 

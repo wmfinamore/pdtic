@@ -24,8 +24,8 @@ class NecessidadeInformacaoAdmin(SimpleHistoryAdmin):
 @admin.register(TipoNecessidade)
 class TipoNecessidade(SimpleHistoryAdmin):
     form = TipoNecessidadeForm
-    list_display = ['id', 'nome']
-    search_fields = ['nome', ]
+    list_display = ['id', 'prefixo', 'nome', ]
+    search_fields = ['nome', 'prefixo', ]
 
 
 @admin.register(NecessidadeTI)
