@@ -24,8 +24,7 @@ class NecessidadeInformacao(Auditoria):
                                                db_comment='Princípio ou diretriz relacionada com a necessidade de '
                                                           'informação')
     origem = models.ForeignKey(TipoOrigem, on_delete=models.PROTECT, db_comment='Tipo de origem da necessidade')
-    areas_relacionadas = models.ManyToManyField(Secretaria, blank=True, db_comment='Secretarias relacionadas com a '
-                                                                                   'necessidade de informação')
+    areas_relacionadas = models.ManyToManyField(Secretaria, blank=True, )
 
     def __str__(self):
         return f"{self.codigo} - {self.descricao[:50]}"
@@ -57,8 +56,7 @@ class NecessidadeTI(Auditoria):
     estrategia_relacionada = models.ForeignKey(PrincipioDiretriz, on_delete=models.PROTECT, null=True, blank=True,
                                                db_comment='Principio ou estratégia relacionada com à necessidade de TI')
     origem = models.ForeignKey(TipoOrigem, on_delete=models.PROTECT, db_comment='Origem da necessidade')
-    areas_relacionadas = models.ManyToManyField(Secretaria, db_comment='Secretarias relacionadas com a necessidade de '
-                                                                       'TI')
+    areas_relacionadas = models.ManyToManyField(Secretaria, )
 
     def __str__(self):
         return f"{self.codigo} - {self.descricao[:50]}"

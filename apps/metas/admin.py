@@ -7,10 +7,10 @@ from .forms import MetasForm, AcaoForm
 @admin.register(Meta)
 class MetaAdmin(SimpleHistoryAdmin):
     form = MetasForm
-    list_display = ['codigo', 'nome', 'indicador', 'valor_meta', 'prazo', ]
-    search_fields = ['codigo', 'nome', 'indicador', 'valor_meta', ]
+    list_display = ['codigo', 'nome', 'valor_meta', 'prazo', ]
+    search_fields = ['codigo', 'nome', 'indicadores', 'valor_meta', ]
     date_hierarchy = 'prazo'
-    filter_horizontal = ['necessidades', ]
+    filter_horizontal = ['necessidades', 'indicadores', ]
 
 
 @admin.register(Acao)
