@@ -36,9 +36,9 @@ class Meta(Auditoria):
 
 
 class Acao(Auditoria):
-    codigo = models.CharField(max_length=10, db_comment='Código da ação', unique=True)
+    codigo = models.CharField(max_length=10, editable=False, default='', db_comment='Código da ação',)
     metas = models.ManyToManyField(Meta, related_name='acoes_metas')
-    nome = models.TextField(db_comment='Nome da ação', unique=True)
+    nome = models.TextField(db_comment='Nome da ação',)
     areas_responsaveis = models.ManyToManyField(Secretaria, related_name='acoes_areas')
     data_inicio_estimada = models.DateField(db_comment='Data de início estimada para a ação')
     data_conclusao_estimada = models.DateField(db_comment='Data de conslusão estimada para a ação')
@@ -52,6 +52,12 @@ class Acao(Auditoria):
     valor_custeio = models.DecimalField(max_digits=14, decimal_places=2, default='0.00',
                                         db_comment='Valor de custeio necessário para manter a ação depois de implantada')
 
+    def save(self, *args, **kwargs):
+        if self.codigo == '':
+            codigo_acao = get_next_value('codigo_acao')
+            self.codigo = f"A{codigo_acao}"
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.codigo} - {self.nome[:50]}"
 
@@ -60,3 +66,7 @@ class Acao(Auditoria):
         verbose_name_plural = 'Ações'
         db_table_comment = 'Ações relacionadas a um ou mais metas'
         ordering = ['codigo']
+        constraints = [
+            models.UniqueConstraint(fields=['codigo'], name='unique_codigo_acao'),
+            models.UniqueConstraint(fields=['nome'], name='unique_nome_acao'),
+        ]

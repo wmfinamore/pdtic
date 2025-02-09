@@ -58,3 +58,4 @@ class AcaoAdmin(SimpleHistoryAdmin):
             },
         ),
     ]
+    readonly_fields = ['codigo', ]

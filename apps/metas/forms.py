@@ -27,7 +27,7 @@ class AcaoForm(forms.ModelForm):
 
     class Meta:
         model = Acao
-        fields = ['codigo', 'metas', 'nome', 'areas_responsaveis', 'data_inicio_estimada',
+        fields = ['metas', 'nome', 'areas_responsaveis', 'data_inicio_estimada',
                   'data_conclusao_estimada', 'quantidade_pessoas', 'competencias', 'valor_investimento',
                   'valor_custeio']
         labels = {
