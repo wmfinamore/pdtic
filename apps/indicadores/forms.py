@@ -35,8 +35,9 @@ class IndicadorForm(forms.ModelForm):
     class Meta:
         model = Indicador
         fields = ['secretaria', 'nome', 'formula', 'unidade_medida', 'responsavel', 'fonte_dados', 'resultado_atual',
-                  'valor_meta', 'periodicidade', 'sentido']
+                  'valor_meta', 'periodicidade', 'sentido', 'principal']
         labels = {
+            'codigo': 'Código',
             'secretaria': 'Secretaria',
             'nome': 'Nome',
             'formula': 'Fórmula',
@@ -47,4 +48,5 @@ class IndicadorForm(forms.ModelForm):
             'valor_meta': 'Valor da meta',
             'periodicidade': 'Periodicidade',
             'sentido': 'Sentido',
+            'principal': 'Indicador Principal?',
         }

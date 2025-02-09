@@ -21,7 +21,9 @@ class PeriodicidadeAdmin(SimpleHistoryAdmin):
 @admin.register(Indicador)
 class IndicadorAdmin(SimpleHistoryAdmin):
     form = IndicadorForm
-    list_display = ['nome', 'secretaria', 'periodicidade', 'sentido', 'fonte_dados', 'resultado_atual', 'valor_meta']
-    autocomplete_fields = ['periodicidade', 'unidade_medida', ]
+    list_display = ['codigo','nome', 'secretaria', 'periodicidade', 'sentido', 'fonte_dados', 'resultado_atual',
+                    'valor_meta', 'principal']
+    autocomplete_fields = ['periodicidade', 'unidade_medida', 'secretaria', ]
     search_fields = ['nome', 'formula', ]
-    list_filter = ['periodicidade', 'unidade_medida', 'secretaria', ]
+    list_filter = ['principal', 'periodicidade', 'unidade_medida', 'secretaria', ]
+    readonly_fields = ['codigo', ]

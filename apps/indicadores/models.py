@@ -1,6 +1,7 @@
 from django.db import models
 from apps.core.models import Auditoria
 from apps.secretarias.models import Secretaria
+from sequences import get_next_value
 
 
 class UnidadeMedida(models.Model):
@@ -36,6 +37,7 @@ SENTIDO =   [
 ]
 
 class Indicador(Auditoria):
+    codigo = models.CharField(max_length=10, editable=False, default='', db_comment='Código da indicador')
     secretaria = models.ForeignKey(Secretaria, on_delete=models.PROTECT,
                                    db_comment='Secretaria responsável pelo indicador')
     nome = models.CharField(max_length=120, db_comment='Nome do indicador')
@@ -53,9 +55,16 @@ class Indicador(Auditoria):
     periodicidade = models.ForeignKey(Periodicidade, on_delete=models.PROTECT,
                                       db_comment='Periodicidade de medição do indicador')
     sentido = models.CharField(max_length=120, choices=SENTIDO, db_comment='Sentido do indicador' )
+    principal = models.BooleanField(default=False, db_comment='Indicador principal')
+
+    def save(self, *args, **kwargs):
+        if self.codigo == '':
+            codigo_indicador = get_next_value('codigo_indicador')
+            self.codigo = f"I{codigo_indicador}"
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.id}-{self.nome}"
+        return f"{self.codigo}-{self.nome}"
 
     class Meta:
         verbose_name = 'Indicador'
@@ -63,3 +72,6 @@ class Indicador(Auditoria):
         ordering = ['nome', ]
         db_table_comment = 'Indicadores chave de desempenho'
         default_related_name = 'indicadores'
+        constraints = [
+            models.UniqueConstraint(fields=['codigo'], name='unique_indicadores'),
+        ]
