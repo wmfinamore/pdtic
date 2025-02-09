@@ -22,7 +22,7 @@ class NecessidadeInformacaoForm(forms.ModelForm):
 
     class Meta:
         model = NecessidadeInformacao
-        fields = ['codigo', 'descricao', 'estrategia_relacionada', 'origem', 'areas_relacionadas',]
+        fields = ['descricao', 'estrategia_relacionada', 'origem', 'areas_relacionadas',]
         labels = {
             'codigo': 'Código',
             'descricao': 'Descrição',

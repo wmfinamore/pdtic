@@ -19,6 +19,7 @@ class NecessidadeInformacaoAdmin(SimpleHistoryAdmin):
     list_filter = ['origem', 'areas_relacionadas', 'estrategia_relacionada']
     autocomplete_fields = ['origem', 'estrategia_relacionada']
     filter_horizontal = ['areas_relacionadas' ]
+    readonly_fields = ['codigo', ]
 
 
 @admin.register(TipoNecessidade)
