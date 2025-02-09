@@ -25,6 +25,6 @@ class TipoAvaliacaoAdmin(SimpleHistoryAdmin):
 class SwotAdmin(SimpleHistoryAdmin):
     form = SwotForm
     model = Swot
-    list_display = ['tipo_ambiente', 'tipo_avaliacao', 'descricao']
+    list_display = ['codigo', 'tipo_ambiente', 'tipo_avaliacao', 'descricao']
     search_fields = ['descricao']
     list_filter = ['tipo_ambiente', 'tipo_avaliacao']

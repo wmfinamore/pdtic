@@ -1,6 +1,7 @@
 from django.db import models
 from apps.core.models import Auditoria
 from smart_selects.db_fields import ChainedForeignKey
+from sequences import get_next_value
 
 
 class TipoAmbiente(Auditoria):
@@ -31,6 +32,7 @@ class TipoAvaliacao(Auditoria):
 
 
 class Swot(Auditoria):
+    codigo = models.CharField(max_length=5, editable=False, default='', db_comment='Codigo da avaliação SWOT')
     tipo_ambiente = models.ForeignKey(TipoAmbiente, on_delete=models.PROTECT, db_comment='Tipo de ambiente')
     tipo_avaliacao = ChainedForeignKey(
         TipoAvaliacao,
@@ -41,6 +43,12 @@ class Swot(Auditoria):
         sort=True)
     descricao = models.TextField(db_comment='Descrição do ponto analisado')
 
+    def save(self, *args, **kwargs):
+        if self.codigo == '':
+            codigo_swot = get_next_value('codigo_swot')
+            self.codigo = f"SW{codigo_swot}"
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.descricao
 
@@ -48,3 +56,6 @@ class Swot(Auditoria):
         verbose_name = 'Swot'
         verbose_name_plural = 'Swots'
         ordering = ['descricao']
+        constraints = [
+            models.UniqueConstraint(fields=['codigo'], name='unique_codigo_swot'),
+        ]

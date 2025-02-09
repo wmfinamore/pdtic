@@ -38,6 +38,7 @@ class SwotForm(forms.ModelForm):
         model = Swot
         fields = ['tipo_ambiente', 'tipo_avaliacao', 'descricao',]
         labels = {
+            'codigo': 'Código',
             'tipo_ambiente': 'Tipo de Ambiente',
             'tipo_avaliacao': 'Tipo de Avaliacao',
             'descricao': 'Descrição',
