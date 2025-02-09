@@ -53,7 +53,7 @@ class NecessidadeTIForm(forms.ModelForm):
 
     class Meta:
         model = NecessidadeTI
-        fields = ['codigo', 'tipo_necessidade', 'descricao', 'estrategia_relacionada', 'origem', 'areas_relacionadas',]
+        fields = [ 'tipo_necessidade', 'descricao', 'estrategia_relacionada', 'origem', 'areas_relacionadas',]
         labels = {
             'codigo': 'Codigo',
             'tipo_necessidade': 'Tipo de Necessidade',

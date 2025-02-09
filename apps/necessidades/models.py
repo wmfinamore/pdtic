@@ -59,7 +59,7 @@ class TipoNecessidade(Auditoria):
 
 
 class NecessidadeTI(Auditoria):
-    codigo = models.CharField(max_length=10, unique=True, db_comment='Código da necessidade de TI')
+    codigo = models.CharField(max_length=10, editable=False, default='', db_comment='Código da necessidade de TI')
     tipo_necessidade = models.ForeignKey(TipoNecessidade, on_delete=models.PROTECT, db_comment='Tipo de necessidade '
                                                                                                'de TI')
     descricao = models.TextField(db_comment='Descrição da necessidade de TI')
@@ -67,6 +67,12 @@ class NecessidadeTI(Auditoria):
                                                db_comment='Principio ou estratégia relacionada com à necessidade de TI')
     origem = models.ForeignKey(TipoOrigem, on_delete=models.PROTECT, db_comment='Origem da necessidade')
     areas_relacionadas = models.ManyToManyField(Secretaria, )
+
+    def save(self, *args, **kwargs):
+        if self.codigo == '':
+            codigo_necessidade = get_next_value(f"{self.tipo_necessidade.prefixo}")
+            self.codigo = f"{self.tipo_necessidade.prefixo}{codigo_necessidade}"
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.codigo} - {self.descricao[:50]}"
@@ -76,3 +82,6 @@ class NecessidadeTI(Auditoria):
         verbose_name_plural = 'Necessidades de TI'
         db_table_comment = 'Inventário de Necessidades de TI para o PDTIC'
         ordering = ['codigo']
+        constraints = [
+            models.UniqueConstraint(fields=['codigo'], name='unique_codigo_necessidade'),
+        ]
