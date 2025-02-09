@@ -11,6 +11,7 @@ class MetaAdmin(SimpleHistoryAdmin):
     search_fields = ['codigo', 'nome', 'indicadores', 'valor_meta', ]
     date_hierarchy = 'prazo'
     filter_horizontal = ['necessidades', 'indicadores', ]
+    readonly_fields = ['codigo', ]
 
 
 @admin.register(Acao)

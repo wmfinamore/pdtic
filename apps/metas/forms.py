@@ -9,7 +9,7 @@ class MetasForm(forms.ModelForm):
 
     class Meta:
         model = Meta
-        fields = ['codigo', 'nome', 'necessidades', 'indicadores', 'valor_meta', 'prazo', ]
+        fields = ['nome', 'necessidades', 'indicadores', 'valor_meta', 'prazo', ]
         labels = {
             'codigo': 'Codigo',
             'nome': 'Nome',
