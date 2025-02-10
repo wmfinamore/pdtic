@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   webpdtic:
     build: .
@@ -16,14 +14,14 @@ services:
       - redipdtic
 
   redipdtic:
-    image: redis:7.0.11-alpine
+    image: redis:7.4.2-alpine
     #restart: always
     expose:
       - 6379
     command: redis-server
 
   dbpdtic:
-    image: postgres:15.2-alpine
+    image: postgres:16.6-bullseye
     volumes:
       - postgres_data_pdtic:/var/lib/postgresql/data/
     ports:

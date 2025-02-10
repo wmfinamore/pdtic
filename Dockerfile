@@ -1,19 +1,19 @@
 # pull official base image
-FROM python:3.10.11-alpine3.17
+FROM python:3.12.9-bullseye
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # install psycopg2 and cryptography dependencies
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev libffi-dev openssl-dev cargo
+RUN apt-get update \
+    && apt-get -y install postgresql-server-dev-all gcc python3-dev musl-dev libffi-dev openssl cargo libjpeg-dev zlib1g
 
-# create directory for the sgpm user
+# create directory for the pdtic user
 RUN mkdir -p /home/pdtic
 
-# create the sgpm user
-RUN addgroup -S pdtic && adduser -S pdtic -G pdtic
+# create the pdtic user
+RUN addgroup --system pdtic && adduser --system  --group pdtic
 
 # create the appropriate directories
 ENV HOME=/home/pdtic
@@ -33,7 +33,7 @@ COPY . .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /home/pdtic/wheels -r requirements.txt
 
 # install dependencies
-RUN apk update && apk add libpq
+RUN apt-get update && apt-get install -y libpq-dev
 RUN pip install --no-cache /home/pdtic/wheels/*
 
 # copy entrypoint.sh
